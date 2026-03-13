@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  Search,
   Baby,
   Landmark,
   GraduationCap,
@@ -13,7 +12,9 @@ import {
   Compass,
   Users,
   MessageCircle,
+  Building2,
 } from "lucide-react";
+import { HomeSearchBar } from "@/components/ui/home-search-bar";
 
 const SERVICE_CATEGORIES = [
   { name: "Early Intervention", slug: "early-intervention", icon: Baby, color: "bg-pink-50 text-pink-600" },
@@ -51,6 +52,12 @@ const QUICK_ACTIONS = [
     href: "/ai-help",
     icon: MessageCircle,
   },
+  {
+    title: "List Your Agency",
+    description: "Are you a provider? Submit your agency to be listed on Kindway",
+    href: "/submit-agency",
+    icon: Building2,
+  },
 ];
 
 export default function HomePage() {
@@ -69,17 +76,7 @@ export default function HomePage() {
         </p>
 
         {/* Search Bar */}
-        <div className="mx-auto max-w-xl">
-          <Link
-            href="/providers?q="
-            className="flex h-14 items-center gap-3 rounded-2xl border-2 border-border bg-white px-5 text-muted-foreground shadow-sm transition-all hover:border-primary hover:shadow-md"
-          >
-            <Search className="h-5 w-5" aria-hidden="true" />
-            <span className="text-base">
-              Search for services or providers...
-            </span>
-          </Link>
-        </div>
+        <HomeSearchBar />
       </section>
 
       {/* Service Categories Grid */}

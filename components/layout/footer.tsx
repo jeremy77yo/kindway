@@ -74,6 +74,22 @@ export function Footer() {
                   AI Help
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/submit-agency"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Add Your Agency
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

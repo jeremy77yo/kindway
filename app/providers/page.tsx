@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import {
   MapPin, Phone, Globe, Star, Clock, CheckCircle,
-  Building2, SlidersHorizontal,
+  Building2, SlidersHorizontal, Search,
 } from "lucide-react";
 import { getProviders, type ProviderListItem } from "@/lib/db/providers";
 import { SearchInput } from "@/components/ui/search-input";
@@ -70,9 +70,22 @@ async function ProviderList({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">
-        {providers.length} provider{providers.length !== 1 ? "s" : ""} found
-      </p>
+      {filters.query && (
+        <div className="flex items-center gap-2 rounded-xl bg-primary-light px-4 py-2.5">
+          <Search className="h-4 w-4 text-primary" aria-hidden="true" />
+          <span className="text-sm font-medium text-primary-dark">
+            Searching for: &ldquo;{filters.query}&rdquo;
+          </span>
+          <span className="text-sm text-primary">
+            &mdash; {providers.length} result{providers.length !== 1 ? "s" : ""}
+          </span>
+        </div>
+      )}
+      {!filters.query && (
+        <p className="text-sm text-muted-foreground">
+          {providers.length} provider{providers.length !== 1 ? "s" : ""} found
+        </p>
+      )}
       {providers.map((provider: ProviderListItem) => {
         const serviceNames = (provider.provider_services ?? [])
           .map((ps) => ps.service?.name)
@@ -186,10 +199,11 @@ export default async function ProvidersPage({ searchParams }: Props) {
       </div>
 
       <div className="mb-6">
-        <Suspense fallback={<div className="h-12 animate-pulse rounded-xl bg-muted" />}>
+        <Suspense fallback={<div className="h-14 animate-pulse rounded-2xl bg-muted" />}>
           <SearchInput
             paramName="q"
             placeholder="Search providers by name or service..."
+            className="[&_input]:h-14 [&_input]:rounded-2xl [&_input]:text-base [&_input]:shadow-sm [&_input]:hover:shadow-md [&_input]:focus:shadow-md"
           />
         </Suspense>
       </div>

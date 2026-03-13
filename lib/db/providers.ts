@@ -63,9 +63,11 @@ export async function getProviders(filters: ProviderFilters = {}): Promise<Provi
     .eq("is_active", true);
 
   if (filters.query) {
-    query = query.textSearch("search_vector", filters.query, {
-      type: "websearch",
-    });
+    // Combine full-text search with ILIKE name search so users can find
+    // providers by partial name even when tsvector coverage is limited.
+    query = query.or(
+      `search_vector.wfts.${filters.query},name.ilike.%${filters.query}%`
+    );
   }
 
   if (filters.city) {

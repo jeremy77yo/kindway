@@ -1,0 +1,13 @@
+-- =============================================================================
+-- Imported Providers from Regional Center Vendor Lists
+-- Generated from QPROVID files (Day Programs, ILS, Respite)
+-- Date: 2026-03-13
+-- =============================================================================
+-- Summary:
+--   Day Programs (880):  71 records
+--   ILS (520):           130 records
+--   Respite (862):       56 records
+--   Total raw:           257 records
+--   Unique new:          236 providers
+--   Existing matches:    3 providers
+-- =============================================================================
