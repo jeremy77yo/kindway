@@ -5,6 +5,7 @@ const VALID_SUBJECTS = [
   "bug-report",
   "add-update-provider",
   "feedback",
+  "get-help",
 ];
 
 export async function POST(request: NextRequest) {

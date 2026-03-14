@@ -13,12 +13,17 @@ import {
   Users,
   MessageCircle,
   Building2,
+  Sun,
+  Handshake,
+  BookOpen,
 } from "lucide-react";
 import { HomeSearchBar } from "@/components/ui/home-search-bar";
 
 const SERVICE_CATEGORIES = [
   { name: "Early Intervention", slug: "early-intervention", icon: Baby, color: "bg-pink-50 text-pink-600" },
   { name: "Regional Center", slug: "regional-center", icon: Landmark, color: "bg-blue-50 text-blue-600" },
+  { name: "Independent Living (ILS)", slug: "independent-living", icon: Home, color: "bg-emerald-50 text-emerald-600" },
+  { name: "Day Programs", slug: "day-programs", icon: Sun, color: "bg-orange-50 text-orange-600" },
   { name: "Special Education", slug: "special-education", icon: GraduationCap, color: "bg-purple-50 text-purple-600" },
   { name: "Therapy Services", slug: "speech-therapy", icon: Heart, color: "bg-red-50 text-red-600" },
   { name: "Behavioral Health", slug: "behavioral-health", icon: Brain, color: "bg-amber-50 text-amber-600" },
@@ -35,22 +40,28 @@ const QUICK_ACTIONS = [
     icon: Compass,
   },
   {
+    title: "Get Help",
+    description: "Stuck or unsure where to start? Tell us your situation and we'll help",
+    href: "/get-help",
+    icon: Handshake,
+  },
+  {
     title: "Get Next Steps",
     description: "Step-by-step guides for accessing common services",
     href: "/next-steps",
     icon: ArrowRight,
   },
   {
-    title: "Community Experiences",
-    description: "Read what others have shared about local providers",
-    href: "/community",
-    icon: Users,
+    title: "Know Your Rights",
+    description: "Understand your rights under the Lanterman Act and how to self-advocate",
+    href: "/know-your-rights",
+    icon: BookOpen,
   },
   {
-    title: "Ask AI Helper",
-    description: "Get personalized guidance about services and eligibility",
-    href: "/ai-help",
-    icon: MessageCircle,
+    title: "Community",
+    description: "Ask questions and learn from others navigating the same system",
+    href: "/community",
+    icon: Users,
   },
   {
     title: "List Your Agency",
@@ -87,7 +98,7 @@ export default function HomePage() {
         >
           Browse by Service Type
         </h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
           {SERVICE_CATEGORIES.map(({ name, slug, icon: Icon, color }) => (
             <Link
               key={slug}

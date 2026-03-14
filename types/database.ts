@@ -51,6 +51,11 @@ export interface Database {
         Insert: ModerationActionInsert;
         Update: ModerationActionUpdate;
       };
+      community_posts: {
+        Row: CommunityPostRow;
+        Insert: CommunityPostInsert;
+        Update: CommunityPostUpdate;
+      };
     };
   };
 }
@@ -277,3 +282,27 @@ export type ModerationActionInsert = Omit<ModerationActionRow, "id" | "created_a
 };
 
 export type ModerationActionUpdate = Partial<ModerationActionInsert>;
+
+// Community Posts
+export interface CommunityPostRow {
+  id: string;
+  parent_id: string | null;
+  title: string | null;
+  body: string;
+  author_display_name: string;
+  category: string | null;
+  status: string;
+  reply_count: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export type CommunityPostInsert = Omit<CommunityPostRow, "id" | "created_at" | "updated_at" | "status" | "reply_count"> & {
+  id?: string;
+  created_at?: string;
+  updated_at?: string;
+  status?: string;
+  reply_count?: number;
+};
+
+export type CommunityPostUpdate = Partial<CommunityPostInsert>;

@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import {
   Baby, Landmark, GraduationCap, Heart, Brain, HandHeart,
   Briefcase, Home, Car, Smile, Laptop, Scale, Users,
-  Stethoscope, ArrowRightCircle,
+  Stethoscope, ArrowRightCircle, Sun,
 } from "lucide-react";
 import { getServices } from "@/lib/db/services";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Baby, Landmark, GraduationCap, Heart, Brain, HandHeart,
   Briefcase, Home, Car, Smile, Laptop, Scale, Users,
-  Stethoscope, ArrowRightCircle,
+  Stethoscope, ArrowRightCircle, Sun,
 };
 
 const COLOR_MAP: Record<string, string> = {
@@ -35,6 +35,8 @@ const COLOR_MAP: Record<string, string> = {
   "family-support": "bg-violet-50 text-violet-600",
   "transition-services": "bg-cyan-50 text-cyan-600",
   "healthcare": "bg-emerald-50 text-emerald-600",
+  "independent-living": "bg-emerald-50 text-emerald-600",
+  "day-programs": "bg-orange-50 text-orange-600",
 };
 
 export default async function ServicesPage() {

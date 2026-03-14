@@ -52,10 +52,26 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="/about"
+                  href="/get-help"
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  About
+                  Get Help
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/know-your-rights"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Know Your Rights
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/glossary"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Glossary
                 </Link>
               </li>
               <li>
@@ -68,10 +84,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/ai-help"
+                  href="/about"
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  AI Help
+                  About
                 </Link>
               </li>
               <li>

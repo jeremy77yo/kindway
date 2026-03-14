@@ -17,6 +17,9 @@ export type {
   ProviderServiceRow,
   ExperienceReportRow,
   ProviderExperienceSummaryRow,
+  CommunityPostRow,
+  CommunityPostInsert,
+  CommunityPostUpdate,
 } from "./database";
 
 // Derived types for joined queries
