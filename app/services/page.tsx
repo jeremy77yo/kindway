@@ -36,6 +36,7 @@ const COLOR_MAP: Record<string, string> = {
   "transition-services": "bg-cyan-50 text-cyan-600",
   "healthcare": "bg-emerald-50 text-emerald-600",
   "independent-living": "bg-emerald-50 text-emerald-600",
+  "independent-living-skills": "bg-emerald-50 text-emerald-600",
   "day-programs": "bg-orange-50 text-orange-600",
 };
 
