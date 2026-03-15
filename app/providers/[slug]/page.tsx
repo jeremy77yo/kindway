@@ -74,6 +74,17 @@ export default async function ProviderDetailPage({ params }: Props) {
         <p className="mt-2 text-muted-foreground leading-relaxed">
           {provider.description}
         </p>
+        {provider.provider_type === "regional-center" && provider.website && (
+          <a
+            href={provider.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+          >
+            <Globe className="h-4 w-4" aria-hidden="true" />
+            Visit Official Website
+          </a>
+        )}
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -110,8 +121,8 @@ export default async function ProviderDetailPage({ params }: Props) {
             </section>
           )}
 
-          {/* Experience Summary */}
-          {summary && (
+          {/* Experience Summary — providers only, not Regional Centers */}
+          {provider.provider_type !== "regional-center" && summary && (
             <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-4 text-lg font-semibold text-foreground">
                 Community Experience
@@ -173,8 +184,8 @@ export default async function ProviderDetailPage({ params }: Props) {
             </section>
           )}
 
-          {/* Individual Experiences */}
-          {experiences.length > 0 && (
+          {/* Individual Experiences — providers only */}
+          {provider.provider_type !== "regional-center" && experiences.length > 0 && (
             <section className="rounded-2xl border border-border bg-white p-6">
               <h2 className="mb-4 text-lg font-semibold text-foreground">
                 Recent Experiences
@@ -215,19 +226,21 @@ export default async function ProviderDetailPage({ params }: Props) {
             </section>
           )}
 
-          {/* Share Your Experience */}
-          <section className="rounded-2xl border border-border bg-white p-6">
-            <div className="mb-6 flex items-center gap-2">
-              <MessageSquarePlus className="h-5 w-5 text-primary" aria-hidden="true" />
-              <h2 className="text-lg font-semibold text-foreground">
-                Share Your Experience
-              </h2>
-            </div>
-            <ReviewForm
-              providerId={provider.id}
-              providerName={provider.name}
-            />
-          </section>
+          {/* Share Your Experience — providers only */}
+          {provider.provider_type !== "regional-center" && (
+            <section className="rounded-2xl border border-border bg-white p-6">
+              <div className="mb-6 flex items-center gap-2">
+                <MessageSquarePlus className="h-5 w-5 text-primary" aria-hidden="true" />
+                <h2 className="text-lg font-semibold text-foreground">
+                  Share Your Experience
+                </h2>
+              </div>
+              <ReviewForm
+                providerId={provider.id}
+                providerName={provider.name}
+              />
+            </section>
+          )}
         </div>
 
         {/* Sidebar */}
