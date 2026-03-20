@@ -11,25 +11,59 @@ import {
   ArrowRight,
   Compass,
   Users,
-  MessageCircle,
   Building2,
   Sun,
   Handshake,
   BookOpen,
+  Car,
+  Smile,
+  Laptop,
+  Scale,
+  Stethoscope,
 } from "lucide-react";
 import { HomeSearchBar } from "@/components/ui/home-search-bar";
+import { getServices } from "@/lib/db/services";
 
-const SERVICE_CATEGORIES = [
-  { name: "Early Intervention", slug: "early-intervention", icon: Baby, color: "bg-pink-50 text-pink-600" },
-  { name: "Regional Center", slug: "regional-center", icon: Landmark, color: "bg-blue-50 text-blue-600" },
-  { name: "Independent Living (ILS)", slug: "independent-living", icon: Home, color: "bg-emerald-50 text-emerald-600" },
-  { name: "Day Programs", slug: "day-programs", icon: Sun, color: "bg-orange-50 text-orange-600" },
-  { name: "Special Education", slug: "special-education", icon: GraduationCap, color: "bg-purple-50 text-purple-600" },
-  { name: "Therapy Services", slug: "speech-therapy", icon: Heart, color: "bg-red-50 text-red-600" },
-  { name: "Behavioral Health", slug: "behavioral-health", icon: Brain, color: "bg-amber-50 text-amber-600" },
-  { name: "Respite Care", slug: "respite-care", icon: HandHeart, color: "bg-teal-50 text-teal-600" },
-  { name: "Employment", slug: "employment", icon: Briefcase, color: "bg-indigo-50 text-indigo-600" },
-  { name: "Housing", slug: "housing", icon: Home, color: "bg-green-50 text-green-600" },
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Baby, Landmark, GraduationCap, Heart, Brain, HandHeart,
+  Briefcase, Home, Car, Smile, Laptop, Scale, Users,
+  Stethoscope, Sun, Key: Home,
+};
+
+const COLOR_MAP: Record<string, string> = {
+  "early-intervention": "bg-pink-50 text-pink-600",
+  "regional-center": "bg-blue-50 text-blue-600",
+  "independent-living": "bg-emerald-50 text-emerald-600",
+  "independent-living-skills": "bg-emerald-50 text-emerald-600",
+  "day-programs": "bg-orange-50 text-orange-600",
+  "special-education": "bg-purple-50 text-purple-600",
+  "speech-therapy": "bg-red-50 text-red-600",
+  "behavioral-health": "bg-amber-50 text-amber-600",
+  "respite-care": "bg-teal-50 text-teal-600",
+  "employment": "bg-indigo-50 text-indigo-600",
+  "housing": "bg-green-50 text-green-600",
+  "transportation": "bg-sky-50 text-sky-600",
+  "recreation": "bg-yellow-50 text-yellow-600",
+  "assistive-technology": "bg-slate-50 text-slate-600",
+  "legal-advocacy": "bg-rose-50 text-rose-600",
+  "family-support": "bg-violet-50 text-violet-600",
+  "transition-services": "bg-cyan-50 text-cyan-600",
+  "healthcare": "bg-emerald-50 text-emerald-600",
+  "occupational-therapy": "bg-orange-50 text-orange-600",
+};
+
+const FEATURED_SLUGS = [
+  "early-intervention",
+  "regional-center",
+  "independent-living",
+  "independent-living-skills",
+  "day-programs",
+  "special-education",
+  "speech-therapy",
+  "behavioral-health",
+  "respite-care",
+  "employment",
+  "housing",
 ];
 
 const QUICK_ACTIONS = [
@@ -71,7 +105,14 @@ const QUICK_ACTIONS = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const allServices = await getServices();
+
+  // Show featured services from DB, falling back to all if no featured match
+  const featuredSet = new Set(FEATURED_SLUGS);
+  const featured = allServices.filter((s) => featuredSet.has(s.slug));
+  const serviceCategories = featured.length > 0 ? featured : allServices.slice(0, 10);
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       {/* Hero Section */}
@@ -99,22 +140,26 @@ export default function HomePage() {
           Browse by Service Type
         </h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-          {SERVICE_CATEGORIES.map(({ name, slug, icon: Icon, color }) => (
-            <Link
-              key={slug}
-              href={`/services/${slug}`}
-              className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center transition-all hover:border-primary/30 hover:shadow-md"
-            >
-              <div
-                className={`flex h-12 w-12 items-center justify-center rounded-xl ${color}`}
+          {serviceCategories.map((service) => {
+            const Icon = ICON_MAP[service.icon_name || ""] || Stethoscope;
+            const color = COLOR_MAP[service.slug] || "bg-muted text-muted-foreground";
+            return (
+              <Link
+                key={service.id}
+                href={`/services/${service.slug}`}
+                className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-5 text-center transition-all hover:border-primary/30 hover:shadow-md"
               >
-                <Icon className="h-6 w-6" aria-hidden="true" />
-              </div>
-              <span className="text-sm font-medium leading-tight">
-                {name}
-              </span>
-            </Link>
-          ))}
+                <div
+                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${color}`}
+                >
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <span className="text-sm font-medium leading-tight">
+                  {service.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
         <div className="mt-4 text-center">
           <Link

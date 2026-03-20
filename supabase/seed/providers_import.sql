@@ -42,7 +42,7 @@ INSERT INTO services (id, name, slug, category, short_description, full_descript
 (
   '11111111-1111-1111-1111-111111111117',
   'Independent Living Skills (ILS)',
-  'independent-living-skills',
+  'independent-living',
   'Adult Services',
   'Training and support to help individuals with developmental disabilities develop skills for independent living in the community.',
   'Independent Living Skills (ILS) programs help individuals with developmental disabilities learn and practice skills needed for greater independence. Services may include training in cooking, cleaning, budgeting, shopping, using public transportation, personal hygiene, medication management, social skills, and community navigation. ILS is typically provided one-on-one or in small groups, either in the individual''s home or in community settings. The goal is to increase self-sufficiency and community participation.',
