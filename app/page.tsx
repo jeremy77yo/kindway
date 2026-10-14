@@ -68,6 +68,12 @@ const FEATURED_SLUGS = [
 
 const QUICK_ACTIONS = [
   {
+    title: "Care Compass demo",
+    description: "Explore San Francisco resources, review referral routes, and build a care-management follow-up plan.",
+    href: "https://compass.kindway.one",
+    icon: Compass,
+  },
+  {
     title: "Find a Provider",
     description: "Search the directory by location, service type, or language",
     href: "/providers",
